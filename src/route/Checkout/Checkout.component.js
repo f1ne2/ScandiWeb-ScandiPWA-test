@@ -131,30 +131,19 @@ export class CheckoutComponent extends SourceCheckout {
       return (
         <div block="Checkout" elem="ProgressSection">
             <div block="Checkout" elem="StepBarTotal" />
-            <div block="Checkout" elem="StepBarActive" mods={ { isSecond: number === 2 } } />
+          { this.renderBlockActive(number) }
           { this.renderBlockOne(number) }
           { this.renderBlockTwo(number) }
         </div>
       );
   }
 
-  renderBlockTwo(number) {
-      const stagesNames = ['Shipping', 'Review & Payments'];
+  renderBlockActive(number) {
       if (number === 1) {
-          return (
-            <div block="Checkout" elem="NextStep" mods={ { isFirst: number === 2 } }>
-              <div className="Checkout-stage-name">{ stagesNames[number - 1] }</div>
-              { this.renderNumber(number) }
-            </div>
-          );
+          return <div block="Checkout" elem="StepBarActive" mods={ { isFirst: number === 1 } } />;
       }
       if (number === 2) {
-          return (
-          <div block="Checkout" elem="NextStep" mods={ { isSecond: number === 2 } }>
-            <div className="Checkout-stage-name">{ stagesNames[number - 1] }</div>
-            { this.renderNumber(number) }
-          </div>
-          );
+          return <div block="Checkout" elem="StepBarActive" mods={ { isSecond: number === 2 } } />;
       }
 
       return null;
@@ -164,18 +153,36 @@ export class CheckoutComponent extends SourceCheckout {
       const stagesNames = ['Shipping', 'Review & Payments'];
       if (number === 1) {
           return (
-            <div block="Checkout" elem="NextStep" mods={ { isSecond: number === 1 } }>
-              <div className="Checkout-stage-name">{ stagesNames[number] }</div>
-              { this.renderNumber(number + 1) }
-            </div>
+              <>
+          <div block="Checkout" elem="NextStep" mods={ { isFirst: number === 1 } }>
+            { this.renderNumber(number) }
+          </div>
+          <div block="Checkout" elem="NextStep" mods={ { isSecond: number === 1 } }>
+            { this.renderNumber(number + 1) }
+          </div>
+          <div className="Checkout-stage-name">{ stagesNames[number - 1] }</div>
+          <div className="Checkout-stage-name">{ stagesNames[number] }</div>
+              </>
           );
       }
+
+      return null;
+  }
+
+  renderBlockTwo(number) {
+      const stagesNames = ['Shipping', 'Review & Payments'];
       if (number === 2) {
           return (
-              <div block="Checkout" elem="NextStep" mods={ { isFirst: number === 2 } }>
+              <>
+                <div block="Checkout" elem="NextStep" mods={ { isFirst: number === 2 } }>
+                  <div className="Checkout-Stage">&#10004;</div>
+                </div>
+                <div block="Checkout" elem="NextStep" mods={ { isSecond: number === 2 } }>
+                  { this.renderNumber(number) }
+                </div>
                 <div className="Checkout-stage-name">{ stagesNames[number - 2] }</div>
-                { this.renderNumber(number - 1) }
-              </div>
+                <div className="Checkout-stage-name">{ stagesNames[number - 1] }</div>
+              </>
           );
       }
 
