@@ -120,13 +120,6 @@ export class CheckoutComponent extends SourceCheckout {
             </div>
           );
       }
-      // <div block="Checkout" elem="Header">
-      // </div>
-      // <div block="Checkout" elem="Step">
-      // </div>
-      // <span block="Checkout" elem="SelectedStep">{ number }</span>
-      // <span block="Checkout" elem="StepsBorder">/</span>
-      // <span block="Checkout" elem="TotalSteps">{ this.stepsCount }</span>
 
       return (
         <div block="Checkout" elem="ProgressSection">
