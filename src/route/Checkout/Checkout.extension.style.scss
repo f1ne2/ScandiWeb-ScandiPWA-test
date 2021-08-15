@@ -62,6 +62,9 @@
   .Checkout-StepBarActive {
     height: 4px;
     width: 33.3%;
+    transition-property: width;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
   }
 
   .Checkout-NextStep {
